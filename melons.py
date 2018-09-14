@@ -1,13 +1,19 @@
 """Classes for melon orders."""
 
 from random import randint
-from datetime import *  
+from datetime import *
+
+class TooManyMelonsError(ValueError):
+    pass
+
 
 class AbstractMelonOrder():
 
     def __init__(self, species, qty):
         self.species = species
         self.qty = qty
+        if self.qty > 100:
+            raise TooManyMelonsError("No more than 100 melons!")
         self.shipped = False
 
     def mark_shipped(self):
